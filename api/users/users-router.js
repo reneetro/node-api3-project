@@ -34,11 +34,16 @@ router.post('/', validateUser, (req, res, next) => {
     .catch(error => next(error));
 });
 
-// router.put('/:id', (req, res) => {
-//   // RETURN THE FRESHLY UPDATED USER OBJECT
-//   // this needs a middleware to verify user id
-//   // and another middleware to check that the request body is valid
-// });
+router.put('/:id', validateUserId, validateUser, (req, res, next) => {
+  // RETURN THE FRESHLY UPDATED USER OBJECT
+  // this needs a middleware to verify user id
+  // and another middleware to check that the request body is valid
+  User.update(req.params.id, req.body)
+    .then(userUpdated => {
+        res.status(200).json(userUpdated)
+    })
+    .catch(error => next(error))
+});
 
 // router.delete('/:id', (req, res) => {
 //   // RETURN THE FRESHLY DELETED USER OBJECT
