@@ -27,7 +27,7 @@ function validateUser(req, res, next) {
   // DO YOUR MAGIC
   let { name } = req.body;
   if (typeof name !== 'string' || name.trim() === '') {
-    next({ status: 400, message: 'missing required name field' });
+    res.status(400).json({ message: 'missing required name field'})
     return;
   }
   
