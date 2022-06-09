@@ -40,11 +40,11 @@ function validatePost(req, res, next) {
   // DO YOUR MAGIC
   let { text } = req.body;
   if (typeof text !== 'string' || text.trim() === '') {
-    next({ status: 400, message: 'missing required text field' });
+    res.status(400).json({ message: 'missing required text'})
     return;
   }
   
-  req.user = { text: text.trim() };
+  req.text = text.trim() ;
 
   next();
 }
